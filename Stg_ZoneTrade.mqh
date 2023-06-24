@@ -23,8 +23,8 @@ INPUT float ZoneTrade_OrderCloseLoss = 80;        // Order close loss
 INPUT float ZoneTrade_OrderCloseProfit = 80;      // Order close profit
 INPUT int ZoneTrade_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("ZoneTrade strategy: Indicators params");
-INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type1 = INDI_AC;                // 1st indicator type to use
-INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type2 = INDI_AO;                // 2nd indicator type to use
+INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type1 = INDI_PIVOT;             // 1st indicator type to use
+INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type2 = INDI_VROC;              // 2nd indicator type to use
 INPUT int ZoneTrade_Indicator_Mode1 = 0;                                      // Mode to use for 1st indicator
 INPUT int ZoneTrade_Indicator_Mode2 = 0;                                      // Mode to use for 2nd indicator
 INPUT int ZoneTrade_Indicator_Shift1 = 0;                                     // Shift to use for 1st indicator
