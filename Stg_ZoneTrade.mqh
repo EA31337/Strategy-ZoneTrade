@@ -4,76 +4,57 @@
  */
 
 // User input params.
-INPUT_GROUP("Indicator strategy: strategy params");
-INPUT float Indicator_LotSize = 0;                // Lot size
-INPUT int Indicator_SignalOpenMethod = 68;        // Signal open method
-INPUT float Indicator_SignalOpenLevel = 20;       // Signal open level
-INPUT int Indicator_SignalOpenFilterMethod = 32;  // Signal open filter method
-INPUT int Indicator_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
-INPUT int Indicator_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT int Indicator_SignalCloseMethod = 0;        // Signal close method
-INPUT int Indicator_SignalCloseFilter = 32;       // Signal close filter (-127-127)
-INPUT float Indicator_SignalCloseLevel = 20;      // Signal close level
-INPUT int Indicator_PriceStopMethod = 0;          // Price limit method
-INPUT float Indicator_PriceStopLevel = 2;         // Price limit level
-INPUT int Indicator_TickFilterMethod = 32;        // Tick filter method (0-255)
-INPUT float Indicator_MaxSpread = 4.0;            // Max spread to trade (in pips)
-INPUT short Indicator_Shift = 0;                  // Shift
-INPUT float Indicator_OrderCloseLoss = 80;        // Order close loss
-INPUT float Indicator_OrderCloseProfit = 80;      // Order close profit
-INPUT int Indicator_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
-INPUT_GROUP("Indicator strategy: Indicator indicator params");
-INPUT ENUM_INDICATOR_TYPE Indicator_Indi_Indicator_Type = INDI_CHAIKIN;            // Indicator type
-INPUT int Indicator_Indi_Indicator_Mode = 0;                                       // Mode to use
-INPUT string Indicator_Indi_Indicator_Path = INDI_CUSTOM_PATH;                     // Custom only: Path
-INPUT string Indicator_Indi_Indicator_Params = "[12]";                             // Custom only: Params
-INPUT int Indicator_Indi_Indicator_Shift = 0;                                      // Shift
-INPUT ENUM_IDATA_SOURCE_TYPE Indicator_Indi_Indicator_SourceType = IDATA_BUILTIN;  // Source type
-INPUT ENUM_EA_DATA_EXPORT_METHOD Indicator_Indi_Indicator_DataExportMethod = EA_DATA_EXPORT_NONE;  // Export method
+INPUT_GROUP("ZoneTrade strategy: strategy params");
+INPUT float ZoneTrade_LotSize = 0;                // Lot size
+INPUT int ZoneTrade_SignalOpenMethod = 68;        // Signal open method
+INPUT float ZoneTrade_SignalOpenLevel = 20;       // Signal open level
+INPUT int ZoneTrade_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT int ZoneTrade_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
+INPUT int ZoneTrade_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT int ZoneTrade_SignalCloseMethod = 0;        // Signal close method
+INPUT int ZoneTrade_SignalCloseFilter = 32;       // Signal close filter (-127-127)
+INPUT float ZoneTrade_SignalCloseLevel = 20;      // Signal close level
+INPUT int ZoneTrade_PriceStopMethod = 0;          // Price limit method
+INPUT float ZoneTrade_PriceStopLevel = 2;         // Price limit level
+INPUT int ZoneTrade_TickFilterMethod = 32;        // Tick filter method (0-255)
+INPUT float ZoneTrade_MaxSpread = 4.0;            // Max spread to trade (in pips)
+INPUT short ZoneTrade_Shift = 0;                  // Shift
+INPUT float ZoneTrade_OrderCloseLoss = 80;        // Order close loss
+INPUT float ZoneTrade_OrderCloseProfit = 80;      // Order close profit
+INPUT int ZoneTrade_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
+INPUT_GROUP("ZoneTrade strategy: Indicators params");
+INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type1 = INDI_AC;                // 1st indicator type to use
+INPUT ENUM_INDICATOR_TYPE ZoneTrade_Indicator_Type2 = INDI_AO;                // 2nd indicator type to use
+INPUT int ZoneTrade_Indicator_Mode1 = 0;                                      // Mode to use for 1st indicator
+INPUT int ZoneTrade_Indicator_Mode2 = 0;                                      // Mode to use for 2nd indicator
+INPUT int ZoneTrade_Indicator_Shift1 = 0;                                     // Shift to use for 1st indicator
+INPUT int ZoneTrade_Indicator_Shift2 = 0;                                     // Shift to use for 2nd indicator
+INPUT string ZoneTrade_Indicator_Path = INDI_CUSTOM_PATH;                     // Custom only: Path
+INPUT int ZoneTrade_Indicator_Shift = 0;                                      // Shift
+INPUT ENUM_IDATA_SOURCE_TYPE ZoneTrade_Indicator_SourceType = IDATA_BUILTIN;  // Source type
 
 // Structs.
 
 // Defines struct with default user strategy values.
-struct Stg_Indicator_Params_Defaults : StgParams {
-  Stg_Indicator_Params_Defaults()
-      : StgParams(::Indicator_SignalOpenMethod, ::Indicator_SignalOpenFilterMethod, ::Indicator_SignalOpenLevel,
-                  ::Indicator_SignalOpenBoostMethod, ::Indicator_SignalCloseMethod, ::Indicator_SignalCloseFilter,
-                  ::Indicator_SignalCloseLevel, ::Indicator_PriceStopMethod, ::Indicator_PriceStopLevel,
-                  ::Indicator_TickFilterMethod, ::Indicator_MaxSpread, ::Indicator_Shift) {
-    Set(STRAT_PARAM_LS, Indicator_LotSize);
-    Set(STRAT_PARAM_OCL, Indicator_OrderCloseLoss);
-    Set(STRAT_PARAM_OCP, Indicator_OrderCloseProfit);
-    Set(STRAT_PARAM_OCT, Indicator_OrderCloseTime);
-    Set(STRAT_PARAM_SOFT, Indicator_SignalOpenFilterTime);
+struct Stg_ZoneTrade_Params_Defaults : StgParams {
+  Stg_ZoneTrade_Params_Defaults()
+      : StgParams(::ZoneTrade_SignalOpenMethod, ::ZoneTrade_SignalOpenFilterMethod, ::ZoneTrade_SignalOpenLevel,
+                  ::ZoneTrade_SignalOpenBoostMethod, ::ZoneTrade_SignalCloseMethod, ::ZoneTrade_SignalCloseFilter,
+                  ::ZoneTrade_SignalCloseLevel, ::ZoneTrade_PriceStopMethod, ::ZoneTrade_PriceStopLevel,
+                  ::ZoneTrade_TickFilterMethod, ::ZoneTrade_MaxSpread, ::ZoneTrade_Shift) {
+    Set(STRAT_PARAM_LS, ZoneTrade_LotSize);
+    Set(STRAT_PARAM_OCL, ZoneTrade_OrderCloseLoss);
+    Set(STRAT_PARAM_OCP, ZoneTrade_OrderCloseProfit);
+    Set(STRAT_PARAM_OCT, ZoneTrade_OrderCloseTime);
+    Set(STRAT_PARAM_SOFT, ZoneTrade_SignalOpenFilterTime);
   }
 };
 
-class Stg_Indicator : public Strategy {
- public:
-  Stg_Indicator(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
-      : Strategy(_sparams, _tparams, _cparams, _name) {}
-
-  static Stg_Indicator *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
-    // Initialize strategy initial values.
-    Stg_Indicator_Params_Defaults stg_indi_defaults;
-    StgParams _stg_params(stg_indi_defaults);
-    // Initialize indicator.
-    // Initialize Strategy instance.
-    ChartParams _cparams(_tf, _Symbol);
-    TradeParams _tparams;
-    Strategy *_strat = new Stg_Indicator(_stg_params, _tparams, _cparams, "Indicator");
-    return _strat;
-  }
-
-  /**
-   * Event on strategy's init.
-   */
-  void OnInit() {
-    int _ishift = ::Indicator_Indi_Indicator_Shift;
-    ENUM_TIMEFRAMES _tf = Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF);
+class Stg_ZoneTrade : public Strategy {
+ protected:
+  IndicatorBase *GetIndicatorInstance(ENUM_INDICATOR_TYPE _type, ENUM_TIMEFRAMES _tf = NULL) {
     IndicatorBase *_indi = NULL;
-    // IndicatorParams _params;
-    switch (Indicator_Indi_Indicator_Type) {
+    switch (_type) {
       case INDI_NONE:  // (None)
         break;
       case INDI_AC:  // Accelerator Oscillator
@@ -151,19 +132,8 @@ class Stg_Indicator : public Strategy {
         _indi = new Indi_ColorLine(_tf);
         break;
       case INDI_CUSTOM:  // Custom indicator
-      {
-        IndiCustomParams _iparams_custom(::Indicator_Indi_Indicator_Path, _ishift);
-        _iparams_custom.SetTf(_tf);
-        if (StringLen(Indicator_Indi_Indicator_Params) > 2) {
-          Matrix<double> _iparams_args = Indicator_Indi_Indicator_Params;
-          for (int _ipa = 0; _ipa < _iparams_args.GetSize(); _ipa++) {
-            DataParamEntry _iparam_entry = _iparams_args[_ipa].Val();
-            _iparams_custom.AddParam(_iparam_entry);
-          }
-        }
-        _indi = new Indi_Custom(_iparams_custom);
+        _indi = new Indi_Custom(_tf);
         break;
-      }
       case INDI_CUSTOM_MOVING_AVG:  // Custom Moving Average
         _indi = new Indi_CustomMovingAverage(_tf);
         break;
@@ -344,34 +314,68 @@ class Stg_Indicator : public Strategy {
         _indi = new Indi_ZigZagColor(_tf);
         break;
       default:
+        SetUserError(ERR_INVALID_PARAMETER);
         break;
     }
-    if (_indi != NULL) {
-      SetIndicator(_indi, Indicator_Indi_Indicator_Type);
-    }
+    return _indi;
+  }
+
+ public:
+  Stg_ZoneTrade(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
+      : Strategy(_sparams, _tparams, _cparams, _name) {}
+
+  static Stg_ZoneTrade *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
+    // Initialize strategy initial values.
+    Stg_ZoneTrade_Params_Defaults stg_indi_defaults;
+    StgParams _stg_params(stg_indi_defaults);
+    // Initialize Strategy instance.
+    ChartParams _cparams(_tf, _Symbol);
+    TradeParams _tparams;
+    Strategy *_strat = new Stg_ZoneTrade(_stg_params, _tparams, _cparams, "ZoneTrade");
+    return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
+    int _ishift = ::ZoneTrade_Indicator_Shift;
+    ENUM_TIMEFRAMES _tf = Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF);
+    SetIndicator(GetIndicatorInstance(::ZoneTrade_Indicator_Type1, _tf), 0);
+    SetIndicator(GetIndicatorInstance(::ZoneTrade_Indicator_Type2, _tf), 1);
   }
 
   /**
    * Check strategy's opening signal.
    */
   bool SignalOpen(ENUM_ORDER_TYPE _cmd, int _method, float _level = 0.0f, int _shift = 0) {
-    IndicatorBase *_indi = GetIndicator(::Indicator_Indi_Indicator_Type);
+    IndicatorBase *_indi1 = GetIndicator(0);
+    IndicatorBase *_indi2 = GetIndicator(1);
+    // @todo: Fix loading indi's shift.
+    int _ishift1 = ::ZoneTrade_Indicator_Shift1;
+    int _ishift2 = ::ZoneTrade_Indicator_Shift2;
     bool _result = true;
     if (!_result) {
       // Returns false when indicator data is not valid.
       return false;
     }
-    IndicatorSignal _signals = _indi.GetSignals(4, _shift);
+    IndicatorSignal _signals1 = _indi1.GetSignals(4, _shift);
     switch (_cmd) {
       case ORDER_TYPE_BUY:
         // Buy signal.
-        _result &= _indi[Indicator_Indi_Indicator_Mode][_shift] > _level;
-        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        _result &= _indi1.IsIncreasing(1, ZoneTrade_Indicator_Mode1, _ishift1);
+        _result &= _indi2.IsIncreasing(1, ZoneTrade_Indicator_Mode2, _ishift2);
+        _result &= _indi1.IsIncByPct(_level, ZoneTrade_Indicator_Mode1, _ishift1, 1);
+        _result &= _indi2.IsIncByPct(_level, ZoneTrade_Indicator_Mode2, _ishift2, 1);
+        //_result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
       case ORDER_TYPE_SELL:
         // Sell signal.
-        _result &= _indi[Indicator_Indi_Indicator_Mode][_shift] < _level;
-        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
+        _result &= _indi1.IsDecreasing(1, ZoneTrade_Indicator_Mode1, _ishift1);
+        _result &= _indi2.IsDecreasing(1, ZoneTrade_Indicator_Mode2, _ishift2);
+        _result &= _indi1.IsDecByPct(_level, ZoneTrade_Indicator_Mode1, _ishift1, 1);
+        _result &= _indi2.IsDecByPct(_level, ZoneTrade_Indicator_Mode2, _ishift2, 1);
+        //_result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
     }
     return _result;
@@ -381,51 +385,14 @@ class Stg_Indicator : public Strategy {
    * Executes on new time periods.
    */
   void OnPeriod(unsigned int _periods = DATETIME_NONE) {
-    ENUM_EA_DATA_EXPORT_METHOD _export_method;
-    IndicatorBase *_indi;
     if ((_periods & DATETIME_MINUTE) != 0) {
       // New minute started.
-      _export_method = ::Indicator_Indi_Indicator_DataExportMethod;
-      if (_export_method != EA_DATA_EXPORT_NONE) {
-        _indi = GetIndicator(::Indicator_Indi_Indicator_Type);
-        _indi.GetEntry();
-      }
     }
     if ((_periods & DATETIME_HOUR) != 0) {
       // New hour started.
     }
     if ((_periods & DATETIME_DAY) != 0) {
       // New day started.
-      _export_method = ::Indicator_Indi_Indicator_DataExportMethod;
-      if (_export_method != EA_DATA_EXPORT_NONE) {
-        ENUM_TIMEFRAMES _tf = Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF);
-        _indi = GetIndicator(::Indicator_Indi_Indicator_Type);
-        if (_indi.GetData().Size() > 0) {
-          // Perform an export of data.
-          int _serializer_flags = SERIALIZER_FLAG_SKIP_HIDDEN | SERIALIZER_FLAG_INCLUDE_DEFAULT |
-                                  SERIALIZER_FLAG_INCLUDE_DYNAMIC | SERIALIZER_FLAG_REUSE_STUB |
-                                  SERIALIZER_FLAG_REUSE_OBJECT;
-          string _indi_key =
-              StringFormat("%s-%d-%d-%d", __FILE__, _tf, _indi.GetData().GetMin(), _indi.GetData().GetMax());
-          SerializerConverter _stub = Serializer::MakeStubObject<BufferStruct<IndicatorDataEntry>>(_serializer_flags);
-          SerializerConverter _obj = SerializerConverter::FromObject(_indi.GetData(), _serializer_flags);
-          if (_export_method == EA_DATA_EXPORT_CSV || _export_method == EA_DATA_EXPORT_ALL) {
-            _obj.ToFile<SerializerCsv>(_indi_key + ".csv", _serializer_flags, &_stub);
-          }
-          if (_export_method == EA_DATA_EXPORT_DB || _export_method == EA_DATA_EXPORT_ALL) {
-            SerializerSqlite::ConvertToFile(_obj, _indi_key + ".sqlite", "idata", _serializer_flags, &_stub);
-          }
-          if (_export_method == EA_DATA_EXPORT_JSON || _export_method == EA_DATA_EXPORT_ALL) {
-            _obj.ToFile<SerializerJson>(_indi_key + ".json", _serializer_flags, &_stub);
-          }
-          // Required for SERIALIZER_FLAG_REUSE_STUB flag.
-          _stub.Clean();
-          // Required for SERIALIZER_FLAG_REUSE_OBJECT flag.
-          _obj.Clean();
-          // Clear cache after export.
-          _indi.ExecuteAction(INDI_ACTION_CLEAR_CACHE);
-        }
-      }
     }
     if ((_periods & DATETIME_WEEK) != 0) {
       // New week started.

@@ -1,6 +1,6 @@
 /**
  * @file
- * Implements Indicator strategy.
+ * Implements ZoneTrade strategy.
  */
 
 // Includes conditional compilation directives.
@@ -24,13 +24,13 @@ input ENUM_LOG_LEVEL Log_Level = V_INFO;  // Log level.
 input bool Info_On_Chart = true;          // Display info on chart.
 
 // Includes strategy.
-#include "Stg_Indicator.mqh"
+#include "Stg_ZoneTrade.mqh"
 
 // Defines.
-#define ea_name "Strategy Indicator"
-#define ea_version "1.010"
+#define ea_name "Strategy ZoneTrade"
+#define ea_version "2.000"
 #define ea_desc "Strategy based on EA31337 framework."
-#define ea_link "https://github.com/EA31337/Strategy-Indicator"
+#define ea_link "https://github.com/EA31337/Strategy-ZoneTrade"
 #define ea_author "EA31337 Ltd"
 
 // Properties.
@@ -40,7 +40,7 @@ input bool Info_On_Chart = true;          // Display info on chart.
 #property description ea_desc
 #endif
 #property link ea_link
-#property copyright "Copyright 2016-2022, EA31337 Ltd"
+#property copyright "Copyright 2016-2023, EA31337 Ltd"
 
 // Class variables.
 EA *ea;
@@ -56,7 +56,7 @@ int OnInit() {
   bool _result = true;
   EAParams ea_params(__FILE__, Log_Level);
   ea = new EA(ea_params);
-  _result &= ea.StrategyAdd<Stg_Indicator>(Active_Tfs);
+  _result &= ea.StrategyAdd<Stg_ZoneTrade>(Active_Tfs);
   return (_result ? INIT_SUCCEEDED : INIT_FAILED);
 }
 
